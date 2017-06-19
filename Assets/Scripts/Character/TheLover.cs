@@ -28,25 +28,34 @@ public class TheLover : MonoBehaviour {
 		mov = Vector3.ClampMagnitude (mov, baseSpeed);
 		mov *= Time.deltaTime;
 
-		lover.Move (mov);
-
 		// lover rotation
 		float rot = Input.GetAxis("Mouse X") * rotSens;
-		transform.Rotate(0, 0, -rot);
 
-		// wind time
-		if (Input.GetMouseButtonDown(0)) {
-			testSprite = Instantiate (testSpritePrefab) as GameObject;
-			testSprite.transform.position = transform.TransformPoint(transform.forward * 1.5f);
-			testSprite.transform.rotation = transform.rotation;
-			RaycastHit2D hit = Physics2D.Raycast (transform.position, transform.up);
-			if (hit.collider) {
-				Debug.Log("hit");
+		if (testSprite == null) {
+			lover.Move (mov);
+			transform.Rotate (0, 0, -rot);
+
+			// wind time
+			if (Input.GetMouseButtonDown (0)) {
+				testSprite = Instantiate (testSpritePrefab) as GameObject;
+				testSprite.transform.position = transform.TransformPoint (0, .1f, 0);
+				testSprite.transform.rotation = transform.rotation;
+				RaycastHit2D hit = Physics2D.Raycast (transform.position, transform.up, 2.0f);
+				if (hit.collider) {
+					Debug.Log ("hit");
+				}
 			}
 		}
 
 		if (testSprite) {
-			testSprite.transform.Translate (0, 1.0f * Time.deltaTime, 0);
+			float scale = Random.Range (1.0f, 4.0f);
+			testSprite.transform.localScale = new Vector3(scale, scale, 0);
+			StartCoroutine (EndScream ());
 		}
+	}
+
+	private IEnumerator EndScream()	{
+		yield return new WaitForSeconds (1.0f);
+		Destroy (testSprite);
 	}
 }
