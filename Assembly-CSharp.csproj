@@ -46,6 +46,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Character\Potential.cs" />
      <Compile Include="Assets\Scripts\Character\Speech.cs" />
      <Compile Include="Assets\Scripts\Character\TheLover.cs" />
  <Reference Include="UnityEngine.UI">
