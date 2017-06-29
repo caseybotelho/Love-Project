@@ -24,7 +24,6 @@ public class Potential : MonoBehaviour {
 	void Update () {
 		transform.Translate (0, speed * Time.deltaTime, 0);
 		transform.localEulerAngles = new Vector3 (0, 0, rot);
-		Debug.Log (speed);
 		currentTime = Time.fixedTime - lastTime;
 		if (currentTime >= delta) {
 			speed = 0;

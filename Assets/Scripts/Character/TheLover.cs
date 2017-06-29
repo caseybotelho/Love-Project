@@ -40,9 +40,11 @@ public class TheLover : MonoBehaviour {
 				testSprite = Instantiate (testSpritePrefab) as GameObject;
 				testSprite.transform.position = transform.TransformPoint (0, .1f, 0);
 				testSprite.transform.rotation = transform.rotation;
-				RaycastHit2D hit = Physics2D.Raycast (transform.position, transform.up, 2.0f);
+				RaycastHit2D hit = Physics2D.CircleCast (transform.position, 2.0f, transform.up, 2.0f);
 				if (hit.collider) {
-					Debug.Log ("hit");
+                    if (hit.transform.gameObject.GetComponent<Potential>()) {
+                        Debug.Log("Test");
+                    }
 				}
 			}
 		}
